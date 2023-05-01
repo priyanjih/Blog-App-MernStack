@@ -1,23 +1,24 @@
-export default function Post() {
+import {formatISO9075} from "date-fns";
+import {Link} from "react-router-dom";
+
+export default function Post({_id,title,summary,cover,content,createdAt,author}) {
+
   return (
     <div className="post">
       <div className="image">
-        <img
-          src="https://plus.unsplash.com/premium_photo-1674512540096-46b2ca19ef96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-          alt=""
-        />
+        <Link to={`/post/${_id}`}>
+          <img src={'http://localhost:4000/'+cover} alt=""/>
+        </Link>
       </div>
-      <div className="text">
-        <h1>parking lot full of cars</h1>
+      <div className="texts">
+        <Link to={`/post/${_id}`}>
+        <h2>{title}</h2>
+        </Link>
         <p className="info">
-          <a className="author">daiv</a>
-          <time>2002-11-31 16:34</time>
+          <a className="author">{author.username}</a>
+          <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summery">
-          Download and use 50000+ Car stock photos for free. ✓ Thousands of new
-          images every day ✓ Completely Free to Use ✓ High-quality videos and
-          images from ...
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );
